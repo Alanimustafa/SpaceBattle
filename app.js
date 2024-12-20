@@ -1,19 +1,28 @@
 
 // SPace Battle | Game Container |
 class SpaceShip {
-  constructor (playerName, color, lives) {
+  constructor (playerName, color, lives, score) {
     this.playerName = playerName,
     this.color = color,
-    this.lives = lives
+    this.lives = lives,
+    this.score = score
   }
 }
 
 
 
 
+let spaceBattleMainBoard = document.getElementById('#spaceBattle');
+let sBContext = spaceBattleMainBoard.getContext ("2d");
 
 
- playerNumber = Number (prompt('enter a number'));
+
+
+
+// scoeCounter Function 
+function scoreCounter () {
+
+  playerNumber = Number (prompt('enter a number'));
 
   computerScore = 0;
   computerLives = 3;
@@ -35,3 +44,7 @@ for (let i = 0; i <= 100; i++) {
   }
 }
 
+} 
+
+scoreCounter();
+ 
