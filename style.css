@@ -1,6 +1,6 @@
 body {
-  display: flex;
   background-color: #333f3c;
   justify-content: center;
-  margin: 3.1em;
+  align-items:center;
+  padding-left: 20vw;
 }
