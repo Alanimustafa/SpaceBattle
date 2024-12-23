@@ -2,6 +2,17 @@
 const canvas = document.getElementById('spaceBattle');
 const ctx = canvas.getContext('2d');
 
+class SpaceShip {
+  constructor (startX, startY, width, height, xDirection, yDirection) {
+    this.startX = startX,
+    this.startY = startY,
+    this.width = width,
+    this.height = height,
+    this.xDirection = xDirection,
+    this.yDirection = yDirection
+  }
+}
+
 // Space Ship Box details
 let spaceShip = { 
   x: 50,       // Start X Location 
