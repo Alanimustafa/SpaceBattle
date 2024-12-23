@@ -53,7 +53,7 @@ let playerFire = new SpaceShip (
   70,   // Fire Size | Width
   100, // Fire Size | Height
   0,     // Fire Movement | X Direction
-  - 5      // Fire Movement | Y Direction (moving downwards)
+  5      // Fire Movement | Y Direction (moving downwards)
 );
 
 // Load the PC Ship image
@@ -91,6 +91,7 @@ function updatespaceShipPosition() {
 
     // Fire Movement | it will be only on Y direction to make the fire goes down
     pcFire.startY += pcFire.yDirection; 
+    // console.log(pcFire.startY);
 
     // Keeping the Space Ship within the canvas
     if (pcSpaceShip.startX <= 0 || pcSpaceShip.startX + pcSpaceShip.width >= canvas.width) {
@@ -107,16 +108,48 @@ function updatespaceShipPosition() {
     }
 }
 
+function playerSpaceShipPosition () {
+    // SpaceShip Movement
+    playerSpaceShip.startX += playerSpaceShip.xDirection;
+    // pcSpaceShip.startY += pcSpaceShip.yDirection;
+
+    // Fire Movement | it will be only on Y direction to make the fire goes down
+    playerFire.startY -= playerFire.yDirection * 5 ; 
+
+    // console.log(playerFire.startY);
+
+    // Keeping the Space Ship within the canvas
+    if (playerSpaceShip.startX <= 0 || playerSpaceShip.startX + playerSpaceShip.width >= canvas.width) {
+      playerSpaceShip.xDirection *= -1; // Reverse x direction horizontally
+    }
+
+    // if (playerSpaceShip.startY <= 0 || playerSpaceShip.startY + playerSpaceShip.height >= canvas.height - 250) {
+    //   playerSpaceShip.yDirection *= -1; // Reverse y direction vertically
+    // }
+
+    // Reset fire position if it moves off the canvas
+    if (playerFire.startY <= 0) {
+      playerFire.startY = playerSpaceShip.startY + playerSpaceShip.height / 2; // Reset fire Y position
+      playerFire.startX = playerSpaceShip.startX + playerSpaceShip.width / 2 - playerFire.width / 2; // Align fire X position with the spaceship center
+    }
+
+}
+
 // Animation loop using fucntoin recursion.
 function animate() {
   drawspaceShip();
   updatespaceShipPosition();
+  playerSpaceShipPosition();
   requestAnimationFrame(animate); // Loop the animation
 }
 
-//animate();
+
+
+animate();
 
 
 // Start the animation once the images are loaded
-image1.onload = animate;
-image2.onload = animate;
+//image1.onload = animate;
+// image2.onload = animate;
+// image3.onload = animate;
+// image4.onload = animate;
