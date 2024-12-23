@@ -11,9 +11,6 @@ class SpaceShip {
     this.xDirection = xDirection,
     this.yDirection = yDirection
   }
-  test () {
-    console.log('Yes Im here');
-  }
 }
 
 // Space Ship Box details
@@ -26,10 +23,10 @@ let pcSpaceShip = new SpaceShip (
   2    // Y increments
 ) 
 
-console.log(pcSpaceShip.startX, pcSpaceShip.startY, pcSpaceShip.test());
+console.log(pcSpaceShip.startX, pcSpaceShip.startY);
   
 // Fire Box details
-let fire = new SpaceShip (
+let pcFire = new SpaceShip (
    50, // Fire Start X Position 
    50, // Fire Start Y Position 
    70,   // Fire Size | Width
@@ -38,7 +35,8 @@ let fire = new SpaceShip (
    5      // Fire Movement | Y Direction (moving downwards)
 );
 
-console.log(fire.startX,fire.width)
+console.log(pcFire.startX,pcFire.yDirection)
+
 // Load the Ship image
 const image1 = new Image();
 image1.src = './images/Rocket.png'; // The Space Ship image
@@ -50,44 +48,44 @@ image2.src = './images/fire.png'; // The Fire image
 // Draws the pcSpaceShip and fire
 function drawspaceShip() {
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
-  ctx.drawImage(image1, pcSpaceShip.x, pcSpaceShip.y, pcSpaceShip.width, pcSpaceShip.height); // Draw the SpaceShip
-  ctx.drawImage(image2, fire.firesSTARTX, fire.firesSTARTY, fire.fireWidth, fire.fireHeight); // Draw the fire
+  ctx.drawImage(image1, pcSpaceShip.startX, pcSpaceShip.startY, pcSpaceShip.width, pcSpaceShip.height); // Draw the SpaceShip
+  ctx.drawImage(image2, pcFire.startX, pcFire.startY, pcFire.width, pcFire.height); // Draw the fire
 }
 
-// // Update the pcSpaceShip and fire positions
-// function updatespaceShipPosition() {
-//   // SpaceShip Movement
-//   pcSpaceShip.x += pcSpaceShip.dx;
-//   pcSpaceShip.y += pcSpaceShip.dy;
+// Update the pcSpaceShip and fire positions
+function updatespaceShipPosition() {
+    // SpaceShip Movement
+    pcSpaceShip.startX += pcSpaceShip.xDirection;
+    pcSpaceShip.startY += pcSpaceShip.yDirection;
 
-//   // Fire Movement | it will be only on Y direction to make the fire goes down
-//   fire.firesSTARTY += fire.fireYinc; 
+    // Fire Movement | it will be only on Y direction to make the fire goes down
+    pcFire.startY += pcFire.yDirection; 
 
-//   // Keeping the Space Ship within the canvas
-//   if (pcSpaceShip.x <= 0 || pcSpaceShip.x + pcSpaceShip.width >= canvas.width) {
-//     pcSpaceShip.dx *= -1; // Reverse x direction horizontally
-//   }
-//   if (pcSpaceShip.y <= 0 || pcSpaceShip.y + pcSpaceShip.height >= canvas.height - 250) {
-//     pcSpaceShip.dy *= -1; // Reverse y direction vertically
-//   }
+    // Keeping the Space Ship within the canvas
+    if (pcSpaceShip.startX <= 0 || pcSpaceShip.startX + pcSpaceShip.width >= canvas.width) {
+      pcSpaceShip.xDirection *= -1; // Reverse x direction horizontally
+    }
+    if (pcSpaceShip.startY <= 0 || pcSpaceShip.startY + pcSpaceShip.height >= canvas.height - 250) {
+      pcSpaceShip.yDirection *= -1; // Reverse y direction vertically
+    }
 
-//   // Reset fire position if it moves off the canvas
-//   if (fire.firesSTARTY > canvas.height) {
-//     fire.firesSTARTY = pcSpaceShip.y + pcSpaceShip.height / 2; // Reset fire Y position
-//     fire.firesSTARTX = pcSpaceShip.x + pcSpaceShip.width / 2 - fire.fireWidth / 2; // Align fire X position with the spaceship center
-//   }
-// }
+    // Reset fire position if it moves off the canvas
+    if (pcFire.startY > canvas.height) {
+      pcFire.startY = pcSpaceShip.startY + pcSpaceShip.height / 2; // Reset fire Y position
+      pcFire.startX = pcSpaceShip.startX + pcSpaceShip.width / 2 - pcFire.width / 2; // Align fire X position with the spaceship center
+    }
+}
 
-// // Animation loop using fucntoin recursion.
-// function animate() {
-//   drawspaceShip();
-//   updatespaceShipPosition();
-//   requestAnimationFrame(animate); // Loop the animation
-// }
+// Animation loop using fucntoin recursion.
+function animate() {
+  drawspaceShip();
+  updatespaceShipPosition();
+  requestAnimationFrame(animate); // Loop the animation
+}
 
-// animate();
+//animate();
 
 
-// // Start the animation once the images are loaded
-// // image1.onload = animate;
-// //image2.onload = animate;
+// Start the animation once the images are loaded
+image1.onload = animate;
+image2.onload = animate;
