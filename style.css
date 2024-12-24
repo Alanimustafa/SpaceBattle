@@ -7,7 +7,8 @@ body {
 
 #gameContainer {
   position: relative;
-  border: solid greenyellow 3px;
+  border: double gray 6px;
+  border-radius: 30px;;
   box-shadow: black 10px 10px 10px;
   width: 1024px;
   height: 768px;
@@ -41,13 +42,14 @@ body {
 
 .gameNavegation {
   display: flex;
-  border: solid red 2px;
   height: 10%;
 }
 
 .pcNavegation,
 .playerNavegation {
   border: solid lightblue 2px;
+  border-radius: 20px 20px 0px 0px;
+  box-shadow: white 0px 1px 10px ;
   height: auto;
   width: 42%;
   color: rgb(0, 189, 0);
@@ -58,6 +60,8 @@ body {
 }
 .logoNavegation {
   border: solid lightblue 2px;
+  box-shadow: white 0px 1px 10px ;
+  border-radius: 20px 20px 0px 0px;
   height: auto;
   width: 16%;
   color: rgb(0, 189, 0);

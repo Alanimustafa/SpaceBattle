@@ -101,26 +101,25 @@ function pcSpaceShipPosition() {
   if (pcSpaceShip.startX <= 0 || pcSpaceShip.startX + pcSpaceShip.width >= gameContainer.offsetWidth) {
     pcSpaceShip.xDirection *= -1;
 
-
     
-    if ((pcSpaceShip.startX >= playerFire.startX - 100) || (pcSpaceShip.startX <= playerFire.startX + 100)  || (pcSpaceShip.startY >= playerFire.startY - 100) && (pcSpaceShip.startY <= playerFire.startY + 100) ) {
-       pcSpaceShip.spaceShipDamage --;
+    if ((pcSpaceShip.startX >= playerFire.startX - 50) || (pcSpaceShip.startX <= playerFire.startX + 50)  || (pcSpaceShip.startY >= playerFire.startY - 50) || (pcSpaceShip.startY <= playerFire.startY + 50) ) {
+       pcSpaceShip.spaceShipDamage = pcSpaceShip.spaceShipDamage - 17 ;
 
        if(pcSpaceShip.spaceShipDamage < 100 && pcSpaceShip.spaceShipDamage >= 75) {
          pcNavegation.style.color = "rgb(0, 189, 0)";
-         pcNavegation.textContent =`${player}     Health ${pcSpaceShip.spaceShipDamage} / 100`;
+         pcNavegation.textContent =`PC Health ${pcSpaceShip.spaceShipDamage} / 100`;
        }
        if(pcSpaceShip.spaceShipDamage < 75 && pcSpaceShip.spaceShipDamage >= 50) {
          pcNavegation.style.color = "yellow";
-         pcNavegation.textContent =`${player}     Health ${pcSpaceShip.spaceShipDamage} / 100`;
+         pcNavegation.textContent =`PC Health ${pcSpaceShip.spaceShipDamage} / 100`;
        }
        if(pcSpaceShip.spaceShipDamage < 50 && pcSpaceShip.spaceShipDamage >= 25) {
          pcNavegation.style.color = "orange";
-         pcNavegation.textContent =`${player}     Health ${pcSpaceShip.spaceShipDamage} / 100`;
+         pcNavegation.textContent =`PC Health ${pcSpaceShip.spaceShipDamage} / 100`;
        }
        if(pcSpaceShip.spaceShipDamage < 25 && pcSpaceShip.spaceShipDamage >= 1) {
          pcNavegation.style.color = "red";
-         pcNavegation.textContent =`${player}     Health ${pcSpaceShip.spaceShipDamage} / 100`;
+         pcNavegation.textContent =`PC Health ${pcSpaceShip.spaceShipDamage} / 100`;
        }
        if(pcSpaceShip.spaceShipDamage === 0) {
          pcNavegation.style.color = "rgb(0, 189, 0)";
@@ -129,15 +128,13 @@ function pcSpaceShipPosition() {
          gameContainer.style.fontFamily = 'impact';
          gameContainer.style.color = 'white';
          gameContainer.style.textAlign = 'center';
-         gameContainer.style.paddingTop = '450px';
+         gameContainer.style.paddingTop = '350px';
        }
-
-
       }
 
-
-
-
+        
+        // // Mustafa
+        // console.log('Pc Space Ship Damage is : ', pcSpaceShip.spaceShipDamage );
   }
 
 // if statement to reverse the PC Ship Y Direction
@@ -157,8 +154,6 @@ function pcSpaceShipPosition() {
 
   pcFire.updateStyle(); // calling the instance function from the class to update the PC Fire.
 }
-
-
 
 
 
@@ -223,12 +218,9 @@ function playerSpaceShipPosition() {
           gameContainer.style.fontFamily = 'impact';
           gameContainer.style.color = 'white';
           gameContainer.style.textAlign = 'center';
-          gameContainer.style.paddingTop = '450px';
+          gameContainer.style.paddingTop = '350px';
         }
 
-        
-        // Mustafa
-        console.log('Pc Space Ship Damage is : ', playerSpaceShip.spaceShipDamage );
       }
 
   }
