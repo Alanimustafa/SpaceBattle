@@ -52,8 +52,8 @@ gameContainer.appendChild(playerFireElement);
 
 
 // Define the PC and PLayer Spaceships and Fires
-const pcSpaceShip = new SpaceShip(pcSpaceShipElement, 50, 50, 50, 100, 2, 2);
-const pcFire = new SpaceShip(pcFireElement, 50, 50, 70, 100, 0, 5);
+const pcSpaceShip = new SpaceShip(pcSpaceShipElement, 50, 150, 50, 100, 2, 2);
+const pcFire = new SpaceShip(pcFireElement, 50, 150, 70, 100, 0, 5);
 const playerSpaceShip = new SpaceShip(playerSpaceShipElement, 450, 650, 70, 100, 2, 2);
 const playerFire = new SpaceShip(playerFireElement, 450, 650, 70, 100, 0, 5);
 
@@ -70,7 +70,7 @@ function pcSpaceShipPosition() {
   }
 
 // if statement to reverse the PC Ship Y Direction
-  if (pcSpaceShip.startY <= 0 || pcSpaceShip.startY + pcSpaceShip.height >= gameContainer.offsetHeight - 250) {
+  if (pcSpaceShip.startY <= 80 || pcSpaceShip.startY + pcSpaceShip.height >= gameContainer.offsetHeight - 220) {
     pcSpaceShip.yDirection *= -1;
   }
 
