@@ -1,7 +1,8 @@
 body {
   margin: 0;
   overflow: hidden;
-  background-color: #333f3c;
+  background-image: url(./images/background3.avif);
+  background-size: contain;
 }
 
 #gameContainer {
@@ -39,6 +40,30 @@ body {
 }
 
 .gameNavegation {
+  display: flex;
   border: solid red 2px;
   height: 10%;
+}
+
+.pcNavegation,
+.playerNavegation {
+  border: solid lightblue 2px;
+  height: auto;
+  width: 42%;
+  color: rgb(0, 189, 0);
+  text-align: center;
+  font-size: 35px;
+  font-weight: bold;
+  padding-top: 15px;
+}
+.logoNavegation {
+  border: solid lightblue 2px;
+  height: auto;
+  width: 16%;
+  color: rgb(0, 189, 0);
+
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  padding-top: 15px;
 }

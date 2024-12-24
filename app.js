@@ -1,8 +1,9 @@
-let playerSpaceShipDamage = 0 ;
+let player = prompt('Enter Play Name');
+
 
 
 class SpaceShip {
-  constructor(element, startX, startY, width, height, xDirection, yDirection) {
+  constructor(element, startX, startY, width, height, xDirection, yDirection, spaceShipDamage) {
     this.element = element;
     this.startX = startX;
     this.startY = startY;
@@ -10,6 +11,7 @@ class SpaceShip {
     this.height = height;
     this.xDirection = xDirection;
     this.yDirection = yDirection;
+    this.spaceShipDamage = spaceShipDamage;
 
     this.updateStyle();
   }
@@ -21,13 +23,34 @@ class SpaceShip {
     this.element.style.height = `${this.height}px`;
   }
 }
-// The Game Main Container
+
+// ----------------  Game Containers and Characters ----------
+
+// The Game Main Container 
 const gameContainer = document.getElementById('gameContainer');
 
-// Game Navegation Bar
+// Game Navegation Bar | Has (2) containers | Player and PC results
 const gameNavegation = document.createElement('div');
 gameNavegation.classList.add('gameNavegation');
 gameContainer.appendChild(gameNavegation);
+
+    // Game Navegation Bar | PC DIV
+    const pcNavegation = document.createElement('div');
+    pcNavegation.classList.add('pcNavegation');
+    gameNavegation.appendChild(pcNavegation);
+
+    // Game Navegation Bar | LOGO
+    const logoNavegation = document.createElement('div');
+    logoNavegation.classList.add('logoNavegation');
+    logoNavegation.style.backgroundImage= "url(./images/Background.jpeg)"
+    gameNavegation.appendChild(logoNavegation);
+    
+    
+    // Game Navegation Bar | Player DIV
+    const playerNavegation = document.createElement('div');
+    playerNavegation.classList.add('playerNavegation');
+    playerNavegation.textContent = `${player} Health 100/100`;
+    gameNavegation.appendChild(playerNavegation);
 
 // PC spaceship DIV
 const pcSpaceShipElement = document.createElement('div');
@@ -44,19 +67,23 @@ const playerSpaceShipElement = document.createElement('div');
 playerSpaceShipElement.classList.add('spaceShip', 'playerSpaceShip');
 gameContainer.appendChild(playerSpaceShipElement);
 
-// Player Fire DIV
+// Player Fire DIV 
 const playerFireElement = document.createElement('div');
 playerFireElement.classList.add('fire', 'playerFire');
 gameContainer.appendChild(playerFireElement);
 
 
+// -------------------- Defining the elements ------------------------
 
 // Define the PC and PLayer Spaceships and Fires
 const pcSpaceShip = new SpaceShip(pcSpaceShipElement, 50, 150, 50, 100, 2, 2);
 const pcFire = new SpaceShip(pcFireElement, 50, 150, 70, 100, 0, 5);
-const playerSpaceShip = new SpaceShip(playerSpaceShipElement, 450, 650, 70, 100, 2, 2);
+const playerSpaceShip = new SpaceShip(playerSpaceShipElement, 450, 650, 70, 100, 2, 2, 100);
 const playerFire = new SpaceShip(playerFireElement, 450, 650, 70, 100, 0, 5);
 
+
+
+// -------------------- PC and Player Fucntions ----------------------
 
 // PC Space Ship Element
 function pcSpaceShipPosition() {
@@ -120,9 +147,11 @@ function playerSpaceShipPosition() {
     playerSpaceShip.startX -= 5; // Move left 5 px
 
       if ((playerSpaceShip.startX >= pcFire.startX - 10) && (playerSpaceShip.startX <= pcFire.startX + 10)  || (playerSpaceShip.startY >= pcFire.startY - 10) && (playerSpaceShip.startY <= pcFire.startY + 10) ) {
-        gameContainer.style.border = 'Solid yellow 7px';
-        playerSpaceShipDamage ++;
-        console.log('Pc Space Ship Damage is : ', playerSpaceShipDamage );
+       // gameContainer.style.border = 'Solid yellow 7px';
+        playerSpaceShip.spaceShipDamage --;
+        playerNavegation.textContent =`${player}     Health ${playerSpaceShip.spaceShipDamage} / 100`;
+        // Mustafa
+        console.log('Pc Space Ship Damage is : ', playerSpaceShip.spaceShipDamage );
       }
 
   }
