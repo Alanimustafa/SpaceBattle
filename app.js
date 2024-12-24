@@ -149,7 +149,37 @@ function playerSpaceShipPosition() {
       if ((playerSpaceShip.startX >= pcFire.startX - 10) && (playerSpaceShip.startX <= pcFire.startX + 10)  || (playerSpaceShip.startY >= pcFire.startY - 10) && (playerSpaceShip.startY <= pcFire.startY + 10) ) {
        // gameContainer.style.border = 'Solid yellow 7px';
         playerSpaceShip.spaceShipDamage --;
-        playerNavegation.textContent =`${player}     Health ${playerSpaceShip.spaceShipDamage} / 100`;
+
+        if(playerSpaceShip.spaceShipDamage < 100 && playerSpaceShip.spaceShipDamage >= 75) {
+          playerNavegation.style.color = "rgb(0, 189, 0)";
+          playerNavegation.textContent =`${player}     Health ${playerSpaceShip.spaceShipDamage} / 100`;
+        }
+        if(playerSpaceShip.spaceShipDamage < 75 && playerSpaceShip.spaceShipDamage >= 50) {
+          playerNavegation.style.color = "yellow";
+          playerNavegation.textContent =`${player}     Health ${playerSpaceShip.spaceShipDamage} / 100`;
+        }
+        if(playerSpaceShip.spaceShipDamage < 50 && playerSpaceShip.spaceShipDamage >= 25) {
+          playerNavegation.style.color = "orange";
+          playerNavegation.textContent =`${player}     Health ${playerSpaceShip.spaceShipDamage} / 100`;
+        }
+        if(playerSpaceShip.spaceShipDamage < 25 && playerSpaceShip.spaceShipDamage >= 1) {
+          playerNavegation.style.color = "red";
+          playerNavegation.textContent =`${player}     Health ${playerSpaceShip.spaceShipDamage} / 100`;
+        }
+        if(playerSpaceShip.spaceShipDamage === 0) {
+          playerNavegation.style.color = "rgb(0, 189, 0)";
+          playerNavegation.textContent =`GAME OVER`;
+          document.body.textContent = 'GAME OVER';
+          document.body.style.fontSize = '300px';
+          document.body.style.fontFamily = 'impact';
+          document.body.style.color = 'white';
+          document.body.style.textShadow = 'black 10px 10px 10px';
+          document.body.style.backgroundSize = 'contain';
+          document.body.style.textAlign = 'center';
+          document.body.style.paddingTop = '250px';
+        }
+
+        
         // Mustafa
         console.log('Pc Space Ship Damage is : ', playerSpaceShip.spaceShipDamage );
       }
