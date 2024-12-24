@@ -1,26 +1,27 @@
-let player = prompt('Enter Play Name');
+let player = prompt('Enter Player Name');
 
 
+// -------------------- Main Class for spaceships and fire -------------
 
 class SpaceShip {
   constructor(element, startX, startY, width, height, xDirection, yDirection, spaceShipDamage) {
-    this.element = element;
-    this.startX = startX;
-    this.startY = startY;
-    this.width = width;
-    this.height = height;
-    this.xDirection = xDirection;
-    this.yDirection = yDirection;
-    this.spaceShipDamage = spaceShipDamage;
+    this.element = element; // PC, Palyer, Pc Space ship Fire and Player Space ship Fire
+    this.startX = startX;   // Element start x Position
+    this.startY = startY;   // Elelment Start Y Position
+    this.width = width;     // Element width
+    this.height = height;   // Element Height
+    this.xDirection = xDirection;     // X counter
+    this.yDirection = yDirection;     // Y counter
+    this.spaceShipDamage = spaceShipDamage;   // Pc and Player Damage Counter
 
     this.updateStyle();
   }
-
+  // To update the space ship and it's fire.
   updateStyle() {
-    this.element.style.left = `${this.startX}px`;
-    this.element.style.top = `${this.startY}px`;
-    this.element.style.width = `${this.width}px`;
-    this.element.style.height = `${this.height}px`;
+    this.element.style.left = `${this.startX}px`;   // Update X direction in px.
+    this.element.style.top = `${this.startY}px`;    // Update Y direction in px.
+    this.element.style.width = `${this.width}px`;   // Update Element Width in px.
+    this.element.style.height = `${this.height}px`; // Update Element height in px.
   }
 }
 
@@ -37,6 +38,7 @@ gameContainer.appendChild(gameNavegation);
     // Game Navegation Bar | PC DIV
     const pcNavegation = document.createElement('div');
     pcNavegation.classList.add('pcNavegation');
+    pcNavegation.textContent = `PC Health 100/100`;
     gameNavegation.appendChild(pcNavegation);
 
     // Game Navegation Bar | LOGO
@@ -73,13 +75,17 @@ playerFireElement.classList.add('fire', 'playerFire');
 gameContainer.appendChild(playerFireElement);
 
 
+
+
 // -------------------- Defining the elements ------------------------
 
 // Define the PC and PLayer Spaceships and Fires
-const pcSpaceShip = new SpaceShip(pcSpaceShipElement, 50, 150, 50, 100, 2, 2);
+const pcSpaceShip = new SpaceShip(pcSpaceShipElement, 50, 150, 50, 100, 2, 2, 100);
 const pcFire = new SpaceShip(pcFireElement, 50, 150, 70, 100, 0, 5);
 const playerSpaceShip = new SpaceShip(playerSpaceShipElement, 450, 650, 70, 100, 2, 2, 100);
 const playerFire = new SpaceShip(playerFireElement, 450, 650, 70, 100, 0, 5);
+
+
 
 
 
@@ -94,11 +100,50 @@ function pcSpaceShipPosition() {
   // if statement to reverse the PC Ship X Direction
   if (pcSpaceShip.startX <= 0 || pcSpaceShip.startX + pcSpaceShip.width >= gameContainer.offsetWidth) {
     pcSpaceShip.xDirection *= -1;
+
+
+    
+    if ((pcSpaceShip.startX >= playerFire.startX - 100) || (pcSpaceShip.startX <= playerFire.startX + 100)  || (pcSpaceShip.startY >= playerFire.startY - 100) && (pcSpaceShip.startY <= playerFire.startY + 100) ) {
+       pcSpaceShip.spaceShipDamage --;
+
+       if(pcSpaceShip.spaceShipDamage < 100 && pcSpaceShip.spaceShipDamage >= 75) {
+         pcNavegation.style.color = "rgb(0, 189, 0)";
+         pcNavegation.textContent =`${player}     Health ${pcSpaceShip.spaceShipDamage} / 100`;
+       }
+       if(pcSpaceShip.spaceShipDamage < 75 && pcSpaceShip.spaceShipDamage >= 50) {
+         pcNavegation.style.color = "yellow";
+         pcNavegation.textContent =`${player}     Health ${pcSpaceShip.spaceShipDamage} / 100`;
+       }
+       if(pcSpaceShip.spaceShipDamage < 50 && pcSpaceShip.spaceShipDamage >= 25) {
+         pcNavegation.style.color = "orange";
+         pcNavegation.textContent =`${player}     Health ${pcSpaceShip.spaceShipDamage} / 100`;
+       }
+       if(pcSpaceShip.spaceShipDamage < 25 && pcSpaceShip.spaceShipDamage >= 1) {
+         pcNavegation.style.color = "red";
+         pcNavegation.textContent =`${player}     Health ${pcSpaceShip.spaceShipDamage} / 100`;
+       }
+       if(pcSpaceShip.spaceShipDamage === 0) {
+         pcNavegation.style.color = "rgb(0, 189, 0)";
+         gameContainer.textContent =`GAME OVER`;
+         gameContainer.style.fontSize = '200px';
+         gameContainer.style.fontFamily = 'impact';
+         gameContainer.style.color = 'white';
+         gameContainer.style.textAlign = 'center';
+         gameContainer.style.paddingTop = '450px';
+       }
+
+
+      }
+
+
+
+
   }
 
 // if statement to reverse the PC Ship Y Direction
   if (pcSpaceShip.startY <= 80 || pcSpaceShip.startY + pcSpaceShip.height >= gameContainer.offsetHeight - 220) {
     pcSpaceShip.yDirection *= -1;
+
   }
 
 // if statement for PC Fire DIV not exceeding the game frame.
@@ -112,6 +157,10 @@ function pcSpaceShipPosition() {
 
   pcFire.updateStyle(); // calling the instance function from the class to update the PC Fire.
 }
+
+
+
+
 
 
 // The keys objects for the left and right keys in the keyboards
@@ -135,6 +184,7 @@ window.addEventListener('keyup', (moveEvent) => {
     keys[moveEvent.key] = false;
   }
 });
+
 
 
 
@@ -168,15 +218,12 @@ function playerSpaceShipPosition() {
         }
         if(playerSpaceShip.spaceShipDamage === 0) {
           playerNavegation.style.color = "rgb(0, 189, 0)";
-          playerNavegation.textContent =`GAME OVER`;
-          document.body.textContent = 'GAME OVER';
-          document.body.style.fontSize = '300px';
-          document.body.style.fontFamily = 'impact';
-          document.body.style.color = 'white';
-          document.body.style.textShadow = 'black 10px 10px 10px';
-          document.body.style.backgroundSize = 'contain';
-          document.body.style.textAlign = 'center';
-          document.body.style.paddingTop = '250px';
+          gameContainer.textContent =`GAME OVER`;
+          gameContainer.style.fontSize = '200px';
+          gameContainer.style.fontFamily = 'impact';
+          gameContainer.style.color = 'white';
+          gameContainer.style.textAlign = 'center';
+          gameContainer.style.paddingTop = '450px';
         }
 
         
