@@ -1,6 +1,44 @@
 body {
+  margin: 0;
+  overflow: hidden;
   background-color: #333f3c;
-  justify-content: center;
-  align-items:center;
-  padding-left: 20vw;
+}
+
+#gameContainer {
+  position: relative;
+  border: solid greenyellow 3px;
+  box-shadow: black 10px 10px 10px;
+  width: 1024px;
+  height: 768px;
+  background: black;
+  margin: 0 auto;
+  overflow: hidden;
+  background-size: cover;
+}
+
+.spaceShip, .fire {
+  position: absolute;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.pcSpaceShip {
+  background-image: url('./images/Rocket.png');
+}
+
+.pcFire {
+  background-image: url('./images/fire.png');
+}
+
+.playerSpaceShip {
+  background-image: url('./images/Rocket2.png');
+}
+
+.playerFire {
+  background-image: url('./images/playerfire.png');
+}
+
+.gameNavegation {
+  border: solid red 2px;
+  height: 10%;
 }

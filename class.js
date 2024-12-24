@@ -2,6 +2,8 @@
 const canvas = document.getElementById('spaceBattle');
 const ctx = canvas.getContext('2d');
 
+
+
 class SpaceShip {
   constructor (startX, startY, width, height, xDirection, yDirection) {
     this.startX = startX,
@@ -75,6 +77,7 @@ image4.src = './images/playerfire.png'; // The Fire image
 // Draws the pcSpaceShip and fire
 function drawspaceShip() {
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+
   ctx.drawImage(image1, pcSpaceShip.startX, pcSpaceShip.startY, pcSpaceShip.width, pcSpaceShip.height); // Draw the PC SpaceShip
   ctx.drawImage(image2, pcFire.startX, pcFire.startY, pcFire.width, pcFire.height); // Draw the PC fire
 
@@ -84,7 +87,7 @@ function drawspaceShip() {
 }
 
 // Update the pcSpaceShip and fire positions
-function updatespaceShipPosition() {
+function pcSpaceShipPosition() {
     // SpaceShip Movement
     pcSpaceShip.startX += pcSpaceShip.xDirection;
     pcSpaceShip.startY += pcSpaceShip.yDirection;
@@ -109,6 +112,7 @@ function updatespaceShipPosition() {
 }
 
 function playerSpaceShipPosition () {
+
     // SpaceShip Movement
     playerSpaceShip.startX += playerSpaceShip.xDirection;
     // pcSpaceShip.startY += pcSpaceShip.yDirection;
@@ -116,7 +120,7 @@ function playerSpaceShipPosition () {
     // Fire Movement | it will be only on Y direction to make the fire goes down
     playerFire.startY -= playerFire.yDirection * 5 ; 
 
-    // console.log(playerFire.startY);
+     // console.log(playerFire.startY);
 
     // Keeping the Space Ship within the canvas
     if (playerSpaceShip.startX <= 0 || playerSpaceShip.startX + playerSpaceShip.width >= canvas.width) {
@@ -135,15 +139,15 @@ function playerSpaceShipPosition () {
 
 }
 
+
+console.log(playerSpaceShip.startX, playerFire.startX, playerSpaceShip.xDirection)
 // Animation loop using fucntoin recursion.
 function animate() {
   drawspaceShip();
-  updatespaceShipPosition();
+  pcSpaceShipPosition();
   playerSpaceShipPosition();
   requestAnimationFrame(animate); // Loop the animation
 }
-
-
 
 animate();
 
