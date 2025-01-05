@@ -101,8 +101,9 @@ function pcSpaceShipPosition() {
   if (pcSpaceShip.startX <= 0 || pcSpaceShip.startX + pcSpaceShip.width >= gameContainer.offsetWidth) {
     pcSpaceShip.xDirection *= -1;
 
-    
+    // PC SpaceShip Damage consditons
     if ((pcSpaceShip.startX >= playerFire.startX - 50) || (pcSpaceShip.startX <= playerFire.startX + 50)  || (pcSpaceShip.startY >= playerFire.startY - 50) || (pcSpaceShip.startY <= playerFire.startY + 50) ) {
+
        pcSpaceShip.spaceShipDamage = pcSpaceShip.spaceShipDamage - 17 ;
 
        if(pcSpaceShip.spaceShipDamage < 100 && pcSpaceShip.spaceShipDamage >= 75) {
@@ -186,30 +187,41 @@ window.addEventListener('keyup', (moveEvent) => {
 // Player Space Ship Element
 function playerSpaceShipPosition() {
 
-  // Pc Space Ship Damage counter
+
   
   if (keys.ArrowLeft && playerSpaceShip.startX > 0) {
     playerSpaceShip.startX -= 5; // Move left 5 px
 
+      // Pc Space Ship Damage counter
       if ((playerSpaceShip.startX >= pcFire.startX - 10) && (playerSpaceShip.startX <= pcFire.startX + 10)  || (playerSpaceShip.startY >= pcFire.startY - 10) && (playerSpaceShip.startY <= pcFire.startY + 10) ) {
-       // gameContainer.style.border = 'Solid yellow 7px';
+
         playerSpaceShip.spaceShipDamage --;
+        
+
 
         if(playerSpaceShip.spaceShipDamage < 100 && playerSpaceShip.spaceShipDamage >= 75) {
           playerNavegation.style.color = "rgb(0, 189, 0)";
           playerNavegation.textContent =`${player}     Health ${playerSpaceShip.spaceShipDamage} / 100`;
+          gameContainer.style.boxShadow= "green 0px 0px 150px";
+          gameContainer.style.border="double darkgreen 6px"
         }
         if(playerSpaceShip.spaceShipDamage < 75 && playerSpaceShip.spaceShipDamage >= 50) {
           playerNavegation.style.color = "yellow";
           playerNavegation.textContent =`${player}     Health ${playerSpaceShip.spaceShipDamage} / 100`;
+          gameContainer.style.boxShadow= "yellow 0px 0px 150px";
+          gameContainer.style.border="double yellow 6px"
         }
         if(playerSpaceShip.spaceShipDamage < 50 && playerSpaceShip.spaceShipDamage >= 25) {
           playerNavegation.style.color = "orange";
           playerNavegation.textContent =`${player}     Health ${playerSpaceShip.spaceShipDamage} / 100`;
+          gameContainer.style.boxShadow= "orange 0px 0px 150px";
+          gameContainer.style.border="double orange 6px"
         }
         if(playerSpaceShip.spaceShipDamage < 25 && playerSpaceShip.spaceShipDamage >= 1) {
           playerNavegation.style.color = "red";
           playerNavegation.textContent =`${player}     Health ${playerSpaceShip.spaceShipDamage} / 100`;
+          gameContainer.style.boxShadow= "red 0px 0px 150px";
+          gameContainer.style.border="double orange 6px";
         }
         if(playerSpaceShip.spaceShipDamage === 0) {
           playerNavegation.style.color = "rgb(0, 189, 0)";
@@ -218,9 +230,27 @@ function playerSpaceShipPosition() {
           gameContainer.style.fontFamily = 'impact';
           gameContainer.style.color = 'white';
           gameContainer.style.textAlign = 'center';
-          gameContainer.style.paddingTop = '350px';
-        }
+          gameContainer.style.paddingTop = '250px';
+          gameContainer.style.paddingBottom = '250px';
+          gameContainer.style.height = "50%";
 
+            const replayButton = document.createElement('button');
+            replayButton.classList.add('replayButton');
+            replayButton.innerText = "PLAY AGAIN";
+            replayButton.style.fontWeight = "bold";
+            replayButton.style.cursor = "pointer";
+            replayButton.style.color = "black";
+            replayButton.style.height = "70px";
+            replayButton.style.width = "180px";
+            replayButton.style.backgroundColor = "yellow";
+            replayButton.style.display = "block";
+            replayButton.style.justifySelf = "center";
+            gameContainer.appendChild(replayButton);
+            
+            replayButton.addEventListener("click", () => {
+              animate();
+            })
+        }
       }
 
   }
