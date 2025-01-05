@@ -130,6 +130,23 @@ function pcSpaceShipPosition() {
          gameContainer.style.color = 'white';
          gameContainer.style.textAlign = 'center';
          gameContainer.style.paddingTop = '350px';
+
+         const replayButton = document.createElement('button');
+            replayButton.classList.add('replayButton');
+            replayButton.innerText = "PLAY AGAIN";
+            replayButton.style.fontWeight = "bold";
+            replayButton.style.cursor = "pointer";
+            replayButton.style.color = "black";
+            replayButton.style.height = "70px";
+            replayButton.style.width = "180px";
+            replayButton.style.backgroundColor = "yellow";
+            replayButton.style.display = "block";
+            replayButton.style.justifySelf = "center";
+            gameContainer.appendChild(replayButton);
+            
+            replayButton.addEventListener('click', () => {
+              window.location.reload();
+            })
        }
       }
 
@@ -161,7 +178,6 @@ function pcSpaceShipPosition() {
 
 // The keys objects for the left and right keys in the keyboards
 let keys = {
-
   ArrowLeft: false, // <- Starts with no move by default.
   ArrowRight: false, // -> Starts with no move by default.
 };
@@ -195,10 +211,9 @@ function playerSpaceShipPosition() {
       // Pc Space Ship Damage counter
       if ((playerSpaceShip.startX >= pcFire.startX - 10) && (playerSpaceShip.startX <= pcFire.startX + 10)  || (playerSpaceShip.startY >= pcFire.startY - 10) && (playerSpaceShip.startY <= pcFire.startY + 10) ) {
 
-        playerSpaceShip.spaceShipDamage --;
+        playerSpaceShip.spaceShipDamage --; 
+
         
-
-
         if(playerSpaceShip.spaceShipDamage < 100 && playerSpaceShip.spaceShipDamage >= 75) {
           playerNavegation.style.color = "rgb(0, 189, 0)";
           playerNavegation.textContent =`${player}     Health ${playerSpaceShip.spaceShipDamage} / 100`;
@@ -247,8 +262,8 @@ function playerSpaceShipPosition() {
             replayButton.style.justifySelf = "center";
             gameContainer.appendChild(replayButton);
             
-            replayButton.addEventListener("click", () => {
-              animate();
+            replayButton.addEventListener('click', () => {
+              window.location.reload();
             })
         }
       }
@@ -276,7 +291,7 @@ function playerSpaceShipPosition() {
 function animate() {
   pcSpaceShipPosition();
   playerSpaceShipPosition();
-  requestAnimationFrame(animate);
+  requestAnimationFrame(animate); // Recursion function
 }
 
 animate();
